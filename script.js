@@ -92,14 +92,28 @@ function renderWeather (data){
         var tempDaily = data.daily[i+1].temp.day
         var windDaily = data.daily[i+1].wind_speed
         var humidityDaily = data.daily[i+1].humidity
+        var dailyIconId = data.daily[i+1].weather[0].icon
 
         var dateDailyH = document.createElement("h4")
         dateDailyH.textContent = dateDaily
         currentDiv.append(dateDailyH)
 
+        var dailyIcon = document.createElement("img")
+        console.log(dailyIconId)
+        dailyIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + dailyIconId + "@2x.png")
+        currentDiv.append(dailyIcon)
+
         var tempDailyP = document.createElement("p")
         tempDailyP.textContent = "Temp: " + tempDaily + " F"
         currentDiv.append(tempDailyP)
+
+        var windDailyP = document.createElement("p")
+        windDailyP.textContent = "Wind: " + windDaily + " MPH"
+        currentDiv.append(windDailyP)
+
+        var humidityDailyP = document.createElement("p")
+        humidityDailyP.textContent = "Humidity: " + humidityDaily + "%"
+        currentDiv.append(humidityDailyP)
     }
 }
 
