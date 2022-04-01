@@ -8,9 +8,16 @@ var day4DivEl = document.getElementById("day-4")
 var day5DivEl = document.getElementById("day-5")
 var day6DivEl = document.getElementById("day-6")
 var dayDivArr = [day2DivEl, day3DivEl, day4DivEl, day5DivEl, day6DivEl]
+var searchDivEl = document.getElementById("prev-search")
+
 
 var apiKey = "25ccde466861620de2e2d72d2d7d4569"
 
+function resultFetch (event){
+    
+    
+    searchInputEl.setAttribute("value", "hello")
+}
 
 function getCity (event){
     event.preventDefault()
@@ -21,12 +28,22 @@ function getCity (event){
     cityHeading.id = ("city-heading")
     currentWeatherDivEl.append(cityHeading)
 
+    currentSearch = document.createElement("button")
+    currentSearch.textContent = cityName
+    currentSearch.id = cityName
+    currentSearch.id = "result"
+    searchDivEl.append(currentSearch)
+    // currentSearch.setAttribute("href", "google.com")
+    
+
+
     var apiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`
 
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => getWeatherData(data))
 
+        searchInputEl.value = ""
 }
 
 function getWeatherData (data){
@@ -80,6 +97,14 @@ function renderWeather (data){
     currentWeatherUvIndex.textContent = "Uv Index: " + uvIndex 
     currentWeatherInfo.appendChild(currentWeatherUvIndex)
 
+    if(uvIndex <= 2){
+        currentWeatherUvIndex.style.color = "green"
+    }else if(uvIndex > 2 && uvIndex < 7){
+        currentWeatherUvIndex.style.color = "#9b870c"
+    }else if(uvIndex >= 7){
+        currentWeatherUvIndex.style.color = "red"
+    }
+
     for(i=0; i < 5; i++){
         currentDiv = dayDivArr[i]
 
@@ -119,4 +144,8 @@ function renderWeather (data){
 
 
 
+
 searchButtonEl.addEventListener("click", getCity)
+
+prevResult = document.getElementById("result")
+prevResult.addEventListener("click", resultFetch)
