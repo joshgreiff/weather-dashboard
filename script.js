@@ -38,7 +38,7 @@ function getCity (event){
     
 
 
-    var apiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`
+    var apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`
 
     fetch(apiUrl)
         .then(response => response.json())
