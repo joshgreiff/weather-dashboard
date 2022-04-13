@@ -15,11 +15,12 @@ var apiKey = "25ccde466861620de2e2d72d2d7d4569"
 
 function resultFetch (event){
     
-    
-    searchInputEl.setAttribute("value", "hello")
+    searchInputEl.value = "hello"
+    console.log("hello")
 }
 
 function getCity (event){
+    
     event.preventDefault()
     var cityName = searchInputEl.value
     
@@ -148,4 +149,5 @@ function renderWeather (data){
 searchButtonEl.addEventListener("click", getCity)
 
 prevResult = document.getElementById("result")
-prevResult.addEventListener("click", resultFetch)
+
+
